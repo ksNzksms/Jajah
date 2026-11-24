@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="تواصل مع فريق تحرير كامل العلوم واقتراح موضوعات أو إرسال الملاحظات.">
+  <title>تواصل معنا | كامل العلوم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">ك</span><span><strong>كامل العلوم</strong><small>معرفة تصنع الأثر</small></span></a>
+      <nav class="desktop-nav"><a href="index.html">الرئيسية</a><a href="category.html">التصنيفات</a><a href="archive.html">الأرشيف</a><a href="about.html">من نحن</a><a class="active" href="contact.html">تواصل معنا</a></nav>
+      <div class="header-actions"><a class="icon-button" href="search.html">⌕</a><button class="icon-button theme-toggle" type="button">◐</button><button class="menu-button" type="button" aria-expanded="false">☰</button></div>
+    </div>
+    <nav class="mobile-nav"><a href="index.html">الرئيسية</a><a href="category.html">التصنيفات</a><a href="archive.html">الأرشيف</a><a href="about.html">من نحن</a><a href="contact.html">تواصل معنا</a><a href="search.html">البحث</a></nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container"><span class="eyebrow">نستمع إليك</span><h1>تواصل معنا</h1><p>للاقتراحات، المقترحات التحريرية، ونقل الملاحظات والتعاون المهني.</p></div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+        <aside>
+          <h2>بيانات التواصل</h2>
+          <p>يسعدنا قراءة رسالتك والرد عليها خلال ثلاثة إلى أربعة أيام عمل.</p>
+          <div class="contact-detail"><strong>البريد الإلكتروني</strong><a href="mailto:hello@kamel3lom.example">hello@kamel3lom.example</a></div>
+          <div class="contact-detail"><strong>وسائل التواصل</strong><div class="social-links"><a href="#">فيسبوك</a><a href="#">إكس</a><a href="#">إنستغرام</a><a href="#">يوتيوب</a></div></div>
+        </aside>
+
+        <form class="contact-form" data-contact-form>
+          <div class="form-row">
+            <label for="name">الاسم الكامل<input id="name" name="name" type="text" required></label>
+            <label for="email">البريد الإلكتروني<input id="email" name="email" type="email" required></label>
+          </div>
+          <label for="subject">الموضوع<input id="subject" name="subject" type="text" required></label>
+          <label for="message">الرسالة<textarea id="message" name="message" rows="7" required></textarea></label>
+          <button class="primary-button" type="submit">إرسال الرسالة</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><p>© 2026 كامل العلوم.</p><p>Designed with <strong>kamel3lom</strong> style.</p></div></footer>
+  <button class="back-to-top" type="button">↑</button>
+  <script src="script.js"></script>
+  <script>
+    document.querySelector("[data-contact-form]").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const status = event.currentTarget.querySelector(".form-status");
+      status.textContent = "تم استلام رسالتك تجريبيًا. سيتم ربط النموذج بخدمة إرسال لاحقًا.";
+      event.currentTarget.reset();
+    });
+  </script>
+</body>
+</html>

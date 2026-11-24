@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ابحث وفلتر مقالات كامل العلوم حسب التصنيف والتاريخ والكاتب والوسوم.">
+  <title>البحث | كامل العلوم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">ك</span><span><strong>كامل العلوم</strong><small>معرفة تصنع الأثر</small></span></a>
+      <nav class="desktop-nav"><a href="index.html">الرئيسية</a><a href="category.html">التصنيفات</a><a href="archive.html">الأرشيف</a><a href="about.html">من نحن</a><a href="contact.html">تواصل معنا</a></nav>
+      <div class="header-actions"><a class="icon-button" href="search.html" aria-current="page">⌕</a><button class="icon-button theme-toggle" type="button">◐</button><button class="menu-button" type="button" aria-expanded="false">☰</button></div>
+    </div>
+    <nav class="mobile-nav"><a href="index.html">الرئيسية</a><a href="category.html">التصنيفات</a><a href="archive.html">الأرشيف</a><a href="about.html">من نحن</a><a href="contact.html">تواصل معنا</a><a href="search.html">البحث</a></nav>
+  </header>
+
+  <main>
+    <section class="page-hero search-hero">
+      <div class="container">
+        <span class="eyebrow">ابحث في المعرفة</span>
+        <h1>البحث في المجلة</h1>
+        <form class="search-form" data-search-form>
+          <label class="sr-only" for="search-input">عبارة البحث</label>
+          <input id="search-input" type="search" placeholder="ابحث عن موضوع، مقال، أو كاتب…">
+          <button type="submit">بحث</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container search-layout">
+        <aside class="search-filters">
+          <h2>تصفية النتائج</h2>
+          <label>التصنيف
+            <select><option>كل التصنيفات</option><option>علوم</option><option>تقنية</option><option>ثقافة</option><option>تاريخ</option><option>أدب</option><option>ذكاء اصطناعي</option></select>
+          </label>
+          <label>التاريخ
+            <select><option>أي تاريخ</option><option>آخر أسبوع</option><option>آخر شهر</option><option>آخر سنة</option></select>
+          </label>
+          <label>الكاتب
+            <select><option>كل الكتّاب</option><option>د. سارة الخطيب</option><option>أحمد المازني</option><option>ليان الحسن</option></select>
+          </label>
+          <label>الوسم
+            <select><option>كل الوسوم</option><option>بحث علمي</option><option>تصميم</option><option>مدن</option><option>قراءة</option></select>
+          </label>
+          <button class="outline-button" type="button" data-reset-search>إعادة ضبط</button>
+        </aside>
+
+        <div>
+          <div class="search-summary"><p><strong>6</strong> نتائج متاحة تجريبيًا</p><select aria-label="ترتيب النتائج"><option>الأحدث</option><option>الأكثر قراءة</option><option>الأقدم</option></select></div>
+          <div class="search-results">
+            <article class="search-result"><a class="result-image" href="article.html"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=500&q=80" alt="ذكاء اصطناعي"></a><div><a class="category-link" href="category.html">ذكاء اصطناعي</a><h2><a href="article.html">كيف يغير الذكاء الاصطناعي مستقبل البحث العلمي؟</a></h2><p>قراءة تحليلية في دور النماذج الذكية في مراجعة الأدبيات وصياغة الفرضيات.</p><span>د. سارة الخطيب • 8 دقائق</span></div></article>
+            <article class="search-result"><a class="result-image" href="article.html"><img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=500&q=80" alt="خرائط"></a><div><a class="category-link" href="category.html">خرائط ودراسات</a><h2><a href="article.html">الخرائط الرقمية ودورها في فهم المدن الحديثة</a></h2><p>كيف تغير الأدوات المكانيّة طريقة قراءة الحركة والهوية والتغير الحضري.</p><span>نوران عادل • 6 دقائق</span></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><p>© 2026 كامل العلوم.</p><p>Designed with <strong>kamel3lom</strong> style.</p></div></footer>
+  <button class="back-to-top" type="button">↑</button>
+  <script src="script.js"></script>
+  <script>
+    document.querySelector("[data-search-form]").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const term = document.querySelector("#search-input").value.trim();
+      if (!term) return;
+      document.querySelector(".search-summary p").innerHTML = "<strong>نتائج تجريبية لـ:</strong> " + term;
+    });
+  </script>
+</body>
+</html>
