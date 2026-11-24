@@ -1,0 +1,10 @@
+<?php
+require_once __DIR__ . '/includes.php';
+$slug = trim((string)($_GET['slug'] ?? '')); $post = get_post($slug);
+if (!$post) { http_response_code(404); page_header('المقال غير موجود'); echo '<section class="empty"><h1>لم نعثر على المقال</h1><a href="index.php">العودة للرئيسية</a></section>'; page_footer(); exit; }
+page_header($post['title'], $post['excerpt']);
+$relatedQ=db()->prepare("SELECT * FROM posts WHERE status='published' AND category=? AND id<>? ORDER BY created_at DESC LIMIT 3"); $relatedQ->execute([$post['category'],$post['id']]); $related=$relatedQ->fetchAll();
+?>
+<nav class="crumb"><a href="index.php">الرئيسية</a> / <a href="category.php?name=<?=rawurlencode($post['category'])?>"><?=e($post['category'])?></a></nav><article class="article"><span class="eyebrow"><?=e($post['category'])?></span><h1><?=e($post['title'])?></h1><p class="deck"><?=e($post['excerpt'])?></p><div class="meta"><?=e($post['author'])?> · <?=e(date('Y-m-d',strtotime($post['created_at'])))?> · <?=max(1,(int)ceil(str_word_count($post['content'])/200))?> دقائق قراءة</div><?php if($post['cover_url']): ?><img class="article-image" src="<?=e($post['cover_url'])?>" alt="<?=e($post['title'])?>"><?php endif; ?><div class="toc"><strong>في هذا المقال</strong><a href="#article-body">متن المقال</a></div><div id="article-body" class="prose"><?php foreach(preg_split('/\R\s*\R/u', trim($post['content'])) as $paragraph): if(trim($paragraph)!==''): ?><p><?=nl2br(e(trim($paragraph)))?></p><?php endif; endforeach; ?></div><div class="share"><strong>شارك المقال:</strong><button class="share-copy" type="button">نسخ الرابط</button></div><section class="authorbox"><strong>عن الكاتب: <?=e($post['author'])?></strong><p>كاتب في ركن المعرفة، يشارك القراء موضوعات وتحليلات من مجالات متنوعة.</p></section></article>
+<?php if($related): ?><section class="sectionhead"><div><span class="eyebrow">تابع القراءة</span><h2>مقالات ذات صلة</h2></div></section><div class="grid"><?php foreach($related as $item) post_card($item); ?></div><?php endif; ?>
+<?php page_footer(); ?>

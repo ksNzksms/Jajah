@@ -1,0 +1,5 @@
+<?php
+require_once __DIR__ . '/includes.php';
+$term=trim((string)($_GET['q']??'')); $posts=[]; if($term!==''){$like='%'.$term.'%';$q=db()->prepare("SELECT * FROM posts WHERE status='published' AND (title LIKE ? OR excerpt LIKE ? OR content LIKE ? OR category LIKE ? OR author LIKE ?) ORDER BY created_at DESC");$q->execute([$like,$like,$like,$like,$like]);$posts=$q->fetchAll();}
+page_header('البحث','ابحث في مقالات ركن المعرفة.'); ?>
+<section class="pageintro"><span class="eyebrow">ابحث في المعرفة</span><h1>البحث</h1><form class="search" method="get"><input type="search" name="q" value="<?=e($term)?>" placeholder="موضوع، مقال، أو كاتب"><button class="btn">بحث</button></form></section><?php if($term!==''): ?><p class="result-count">نتائج البحث عن «<?=e($term)?>»: <?=count($posts)?></p><div class="grid"><?php foreach($posts as $post) post_card($post); ?></div><?php if(!$posts): ?><p class="empty">لا توجد نتائج مطابقة. جرّب كلمات أخرى.</p><?php endif; ?><?php endif; ?><?php page_footer(); ?>

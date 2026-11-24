@@ -1,0 +1,5 @@
+<?php
+require_once __DIR__ . '/includes.php';
+$name=trim((string)($_GET['name']??'')); $sql="SELECT * FROM posts WHERE status='published'"; $args=[]; if($name!==''){$sql.=' AND category=?';$args[]=$name;} $sql.=' ORDER BY created_at DESC'; $q=db()->prepare($sql);$q->execute($args);$posts=$q->fetchAll();$cats=db()->query("SELECT category,COUNT(*) n FROM posts WHERE status='published' GROUP BY category ORDER BY category")->fetchAll();
+page_header($name?:'التصنيفات','تصفح المقالات بحسب التصنيف.'); ?>
+<section class="pageintro"><span class="eyebrow">مكتبة المعرفة</span><h1><?=e($name?:'التصنيفات')?></h1><p>اختر المجال الذي يهمك وتابع أحدث المقالات.</p></section><div class="chips"><a href="category.php" class="chip">الكل</a><?php foreach($cats as $cat): ?><a class="chip" href="category.php?name=<?=rawurlencode($cat['category'])?>"><?=e($cat['category'])?> <small>(<?= (int)$cat['n']?>)</small></a><?php endforeach; ?></div><div class="grid"><?php foreach($posts as $post) post_card($post); ?></div><?php if(!$posts): ?><p class="empty">لا توجد مقالات منشورة في هذا التصنيف بعد.</p><?php endif; ?><?php page_footer(); ?>
